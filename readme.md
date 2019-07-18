@@ -1,4 +1,4 @@
-# larsamp
+# larsamp v0.1
  
 The tutorial for the application using Laravel framework can be found here: https://www.youtube.com/watch?v=neSHAWdE44c&list=PLillGF-RfqbYhQsN5WMXy6VsDMKGadrJ-&index=1
 
