@@ -1,5 +1,8 @@
 <?php
-//-m when creating models will create the migration table to reuse the schema for many other SQLs
+//-m when creating models will create the migration table to reuse the schema for many other SQLs and working directly with the db without interface (its structure section)
+// for creating another table, create a model by running command. 2 basic tables are user_table and password_reset.
+// to start the migration, use php artisan migrate
+
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;

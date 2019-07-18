@@ -27,3 +27,6 @@ class PagesController extends Controller
     }
 
 }
+
+// <!-- php artisan make:controller PostsController -->
+
