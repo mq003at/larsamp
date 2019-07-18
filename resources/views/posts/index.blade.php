@@ -8,7 +8,7 @@
             @foreach($posts as $post)
                 <div class="well">
                     <div class="list-group-item">
-                    <h3>{{$post->title}}</h3>
+                    <h3><a href="/larsamp/public/posts/{{$post->id}}/">{{$post->title}}</a></h3>
                     <p>{{$post->body}}</p>
                     <small>Written on {{$post->created_at}}</small>
                 </div>
