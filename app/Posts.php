@@ -13,6 +13,8 @@ class Posts extends Model
     public $primaryKey = 'id';
     // Timestamps
     public $timestamps = true; // its true by default anw
+    // fillable. Add this line to allow sending many properties at once
+    protected $fillable = ['title', 'body'];
 
 }
 

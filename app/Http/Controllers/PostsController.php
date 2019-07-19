@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Posts;
 
+use DB; // library using the commands from your own database
+
 class PostsController extends Controller
 {
     /**
@@ -15,8 +17,10 @@ class PostsController extends Controller
      */
     public function index()
     {
-        // \larsamp\public\posts
-        $posts =  Posts::all();
+        // middlewares holding contents for \larsamp\public\posts
+        $posts =  Posts::orderBy('title', 'asc')->paginate(5);        // order the posts ascendingly and get them all, put them into $posts, we can also add ->take(1) to take only first post
+        // find specific posts with where $posts = Posts::where('title', 'Hello World!')->get();
+        // if having use DB $posts = DB::select('SELECT * FROM posts');
         return view('posts.index') -> with('posts', $posts);
     }
 
@@ -27,7 +31,8 @@ class PostsController extends Controller
      */
     public function create()
     {
-        //
+        // \larsamp\public\posts\create
+        return view('posts.create');
     }
 
     /**
@@ -38,7 +43,17 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dealing with the data from create.blade.php
+        $this->validate($request, [
+            'title' => 'required',
+            'body' => 'required'
+        ]);  // validate the form
+        $post = new Posts([
+            'title' => $request->input('title'),
+            'body' => $request->input('body'),
+        ]);
+        $post->save();
+        return redirect('/posts')->with('success', 'Post has been added!');
     }
 
     /**
@@ -49,7 +64,9 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        //
+        // code the dynamic site when got to /posts/{{$id}}
+        $post = Posts::find($id);
+        return view('posts.show') -> with('post', $post);
     }
 
     /**
@@ -60,7 +77,10 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        // retrieve the post need editted and throw them to edit.php
+        $post = Posts::find($id);
+        return view('posts.edit')->with('post', $post);
+        
     }
 
     /**
@@ -72,7 +92,18 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // get the updated data
+        $this->validate($request, [
+            'title' => 'required',
+            'body' => 'required'
+        ]);  // validate the form
+
+        $post = Posts::find($id);
+        $post->title = $request->get('title');
+        $post->body = $request->get('body');
+        $post->save();
+
+        return redirect('/posts')->with('success', 'Post has been updated!');
     }
 
     /**
@@ -83,6 +114,10 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // delete the data
+        $post = Posts::find($id);
+        $post->delete();
+
+        return redirect('/posts')->with('success', 'The post has been removed');
     }
 }
