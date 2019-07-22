@@ -29,3 +29,6 @@ Route::get('/signin', 'PagesController@signin');
 // use php artisan route:list to check routes
 Route::resource('posts', 'PostsController');    // route to resources of all posts request. This will direct user to specific URL based on the method they sent
 
+
+Auth::routes();
+Route::get('/dashboard', 'DashBoardController@index');

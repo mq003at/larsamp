@@ -14,7 +14,7 @@ class Posts extends Model
     // Timestamps
     public $timestamps = true; // its true by default anw
     // fillable. Add this line to allow sending many properties at once
-    protected $fillable = ['title', 'body'];
+    protected $fillable = ['title', 'body', 'user_id', 'user_name'];
 
 }
 

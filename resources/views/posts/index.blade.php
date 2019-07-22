@@ -13,7 +13,7 @@
                     <div class="list-group-item">
                     <h3><a href="{{url('posts')}}/{{$post->id}}">{{$post->title}}</a></h3>
                     <p>{{$post->body}}</p>
-                    <small>Written on {{$post->created_at}}</small>
+                    <small>Written on {{$post->created_at}} by {{$post->user_name}}</small>
                 </div>
                 </div>
             @endforeach

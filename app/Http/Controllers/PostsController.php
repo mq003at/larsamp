@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Posts;
+use Auth;
 
 use DB; // library using the commands from your own database
 
@@ -51,6 +52,8 @@ class PostsController extends Controller
         $post = new Posts([
             'title' => $request->input('title'),
             'body' => $request->input('body'),
+            'user_id' => auth()->id(),
+            'user_name' => Auth::user()->name
         ]);
         $post->save();
         return redirect('/posts')->with('success', 'Post has been added!');
