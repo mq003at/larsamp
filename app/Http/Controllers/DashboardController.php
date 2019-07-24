@@ -16,6 +16,7 @@ class DashboardController extends Controller
      */
     public function __construct()
     {
+        // authentication middleware to show the login screen 
         $this->middleware('auth');
     }
 
