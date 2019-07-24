@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 // interface for dashboard for each of user registering in 
@@ -25,6 +26,8 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        $user_id = auth()->user()->id;
+        $user = User::find($user_id);       // take all datas from user based on ID
+        return view('dashboard')->with('posts', $user->posts); // take out all the posts user has
     }
 }
